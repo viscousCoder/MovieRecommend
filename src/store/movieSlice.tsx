@@ -4,6 +4,46 @@ import { TOKEN_TMDB } from "../common/constant.ts";
 
 const token = TOKEN_TMDB;
 
+export interface MediaItem {
+  id: number;
+  title?: string;
+  name?: string;
+  original_title?: string;
+  original_name?: string;
+  overview: string;
+  poster_path: string;
+  backdrop_path: string;
+  genre_ids: number[];
+  media_type: "movie" | "tv";
+  adult: boolean;
+  original_language: string;
+  popularity: number;
+  release_date?: string;
+  first_air_date?: string;
+  vote_average: number;
+  vote_count: number;
+  video?: boolean;
+  origin_country?: string[];
+  profile_path?: string;
+}
+
+export interface ApiResponse {
+  loading: boolean;
+  data: MediaItem[];
+  error: string;
+}
+
+export interface ThunkPayload {
+  id?: string;
+  query?: string;
+}
+
+interface MovieState {
+  loading: boolean;
+  data: MediaItem[];
+  error: string;
+}
+
 const apiClient = axios.create({
   baseURL: "https://api.themoviedb.org/3",
   headers: {
@@ -14,13 +54,13 @@ const apiClient = axios.create({
 
 const initialState = {
   loading: false,
-  data: [],
+  data: [] as MediaItem[],
   error: "",
-};
+} as MovieState;
 
 /** Generic Thunk Creator */
 const createThunk = (type: string, url: string) =>
-  createAsyncThunk(type, async (payload?: any) => {
+  createAsyncThunk(type, async (payload?: ThunkPayload) => {
     try {
       const response = await apiClient.get(
         typeof url === "function" ? url(payload) : url

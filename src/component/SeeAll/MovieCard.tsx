@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Card, CardMedia, Typography, Chip } from "@mui/material";
+import { Box, Card, CardMedia, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 interface Movie {

@@ -3,18 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store.tsx";
 import {
   allMoviesAndShow,
-  handlePeople,
   handleTv,
   trendingMovie,
 } from "../store/movieSlice.tsx";
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Tab,
-  Typography,
-} from "@mui/material";
-import TrendingMovie from "./TrendingMovie.tsx";
+import { Box, Container, Tab, Typography } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";

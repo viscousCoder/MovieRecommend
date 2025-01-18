@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
-import AdbIcon from "@mui/icons-material/Adb";
 import SearchIcon from "@mui/icons-material/Search";
 
 import React, { useState } from "react";
@@ -19,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store.tsx";
 import { handleSearchBar } from "../../store/movieSlice.tsx";
-import logo from "../assets/logo1.png";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -68,7 +66,7 @@ const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
-  const [searchQuery, setSearchQuery] = useState(""); // State for search input
+  const [searchQuery, setSearchQuery] = useState<string>(""); // State for search input
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);

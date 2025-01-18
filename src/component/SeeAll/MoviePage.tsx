@@ -14,11 +14,6 @@ const MoviesPage: React.FC = () => {
   const navigate = useNavigate();
   const movies = useSelector<RootState, any[]>((state) => state.movie.data);
 
-  const handleClick = (movie) => {
-    console.log(movie);
-    localStorage.setItem("media_type", movie.media_type);
-    navigate(`/${movie.id}`);
-  };
   return (
     <Box
       display="flex"

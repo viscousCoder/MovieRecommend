@@ -15,6 +15,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../store/store";
+import { MediaItem } from "../../store/movieSlice";
 
 /**
  * To show list of all movies
@@ -23,7 +24,9 @@ import { RootState } from "../../store/store";
 
 const DataList = () => {
   const naviagte = useNavigate();
-  const listData = useSelector<RootState>((state) => state.movie.data);
+  const listData = useSelector<RootState>(
+    (state) => state.movie.data
+  ) as MediaItem[];
 
   /**
    *
@@ -120,10 +123,12 @@ const DataList = () => {
                           textOverflow: "ellipsis",
                         }}
                       >
-                        {" "}
-                        {(item.title || item.name).length > 25
+                        {(item.title ?? item.name ?? "Unknown").length > 25
+                          ? (item.title ?? item.name)?.slice(0, 20) + "..."
+                          : item.title ?? item.name ?? "Unknown"}
+                        {/* {(item.title || item.name||).length > 25
                           ? (item.title || item.name).slice(0, 20)
-                          : item.title || item.name}
+                          : item.title || item.name} */}
                       </Typography>
                     </Button>
                     <Button size="small" color="primary">
@@ -143,11 +148,12 @@ const DataList = () => {
                   </Stack>
                   <Avatar
                     sx={{
-                      backgroundColor: item?.vote_average?.toFixed(1)
-                        ? item?.vote_average?.toFixed(1) > 6
+                      backgroundColor:
+                        item?.vote_average && item.vote_average > 6
                           ? "green"
-                          : "orange"
-                        : "red",
+                          : item.vote_average
+                          ? "orange"
+                          : "red",
                     }}
                   >
                     {item?.vote_average?.toFixed(1)}
