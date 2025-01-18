@@ -1,14 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import {
-  Avatar,
-  Box,
-  Grid,
-  Typography,
-  Card,
-  CardContent,
-} from "@mui/material";
+import { Avatar, Box, Grid, Typography, Card } from "@mui/material";
 
 /**
  *

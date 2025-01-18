@@ -9,9 +9,9 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { AppDispatch, RootState } from "../../store/store.tsx";
+import { AppDispatch } from "../../store/store.tsx";
 import DataList from "../DataList/DataList.tsx";
 import {
   handleRecommend,
