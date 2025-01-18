@@ -42,6 +42,8 @@ const RecomSimilar = () => {
   };
 
   useEffect(() => {
+    let data_type = localStorage.getItem("media_type");
+
     if (value === "recommend") {
       data_type === "movie"
         ? dispatch(handleRecommend(id))
@@ -52,7 +54,7 @@ const RecomSimilar = () => {
         ? dispatch(handleSimilar(id))
         : dispatch(handleSimilarTvShow(id));
     }
-  }, [value, id]);
+  }, [value, id, dispatch]);
 
   return (
     <>

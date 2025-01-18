@@ -30,7 +30,7 @@ const HomeComponent = () => {
     if (value === "all") dispatch(allMoviesAndShow());
     if (value === "movie") dispatch(trendingMovie());
     if (value === "tv") dispatch(handleTv());
-  }, [value]);
+  }, [value, dispatch]);
 
   const handleClick = () => {
     navigate("/trending");

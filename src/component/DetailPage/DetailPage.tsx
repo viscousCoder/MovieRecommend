@@ -32,6 +32,8 @@ const DetailPage = () => {
   // console.log(reviews);
 
   useEffect(() => {
+    let item_type = localStorage.getItem("media_type");
+
     item_type === "movie"
       ? dispatch(fetchEntityDetails({ id: id, type: "movie" }))
       : dispatch(fetchEntityDetails({ id: id, type: "tv" }));
@@ -41,7 +43,7 @@ const DetailPage = () => {
     item_type === "movie"
       ? dispatch(handleReviews({ id: id, type: "movie" }))
       : dispatch(handleReviews({ id: id, type: "tv" }));
-  }, [id]);
+  }, [id, dispatch]);
 
   // console.log(data);
 

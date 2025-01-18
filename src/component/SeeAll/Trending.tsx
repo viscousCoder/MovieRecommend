@@ -9,7 +9,7 @@ const Trending = () => {
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(trendingMovie());
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <TopCarousel />
