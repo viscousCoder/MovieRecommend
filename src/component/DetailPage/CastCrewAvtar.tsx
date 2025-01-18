@@ -112,7 +112,7 @@ const CastCrewAvtar: React.FC<CastSliderProps> = ({ cast, title }) => {
       </Typography>
       {cast.length > 1 ? (
         <Slider {...sliderSettings}>
-          {cast.map((member) => (
+          {cast?.map((member) => (
             <Box
               key={member.id}
               sx={{
@@ -144,7 +144,7 @@ const CastCrewAvtar: React.FC<CastSliderProps> = ({ cast, title }) => {
           ))}
         </Slider>
       ) : (
-        cast.map((member) => (
+        cast?.map((member) => (
           <Box
             key={member.id}
             sx={{

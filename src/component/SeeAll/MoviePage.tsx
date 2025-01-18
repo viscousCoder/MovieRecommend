@@ -50,7 +50,7 @@ const MoviesPage: React.FC = () => {
             "Japanese",
             "Jonsari",
             "Tamil",
-          ].map((tag) => (
+          ]?.map((tag) => (
             <Button
               variant="outlined"
               sx={{
@@ -71,7 +71,7 @@ const MoviesPage: React.FC = () => {
         <Divider sx={{ my: 2 }} />
 
         <Grid container spacing={2}>
-          {movies.map((movie) => (
+          {movies?.map((movie) => (
             <Grid
               item
               xs={12}

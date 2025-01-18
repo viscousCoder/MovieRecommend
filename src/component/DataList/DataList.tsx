@@ -62,7 +62,7 @@ const DataList = () => {
         justifyContent={"center"}
         marginBottom={3}
       >
-        {listData.length <= 0 && (
+        {listData?.length <= 0 && (
           <Box
             sx={{
               height: "40rem",

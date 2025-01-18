@@ -39,7 +39,7 @@ const CompanyProduction: React.FC = () => {
           Production Companies
         </Typography>
         <Grid container spacing={2}>
-          {companies.map((company) => (
+          {companies?.map((company) => (
             <Grid item xs={12} sm={6} md={4} key={company.id}>
               <Card
                 sx={{
@@ -94,7 +94,7 @@ const CompanyProduction: React.FC = () => {
             {data.genres?.map((genre, index) => (
               <span key={genre.id}>
                 {genre.name}
-                {index < data.genres.length - 1 && ", "}
+                {index < data.genres?.length - 1 && ", "}
               </span>
             ))}
           </Typography>
