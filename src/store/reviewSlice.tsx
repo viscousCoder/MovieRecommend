@@ -1,17 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { TOKEN_TMDB } from "../common/constant.ts";
+import { API_KEY } from "../common/constant.ts";
 import axios from "axios";
 
 // Centralize API request for reviews
 const fetchReviews = async (id: string, type: "movie" | "tv") => {
   const response = await axios.get(
-    `https://api.themoviedb.org/3/${type}/${id}/reviews?language=en-US&page=1`,
-    {
-      headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${TOKEN_TMDB}`,
-      },
-    }
+    `https://api.themoviedb.org/3/${type}/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`
   );
   return response.data.results;
 };

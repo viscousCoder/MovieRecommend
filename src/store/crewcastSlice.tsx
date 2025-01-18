@@ -1,17 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { TOKEN_TMDB } from "../common/constant.ts";
+import { API_KEY } from "../common/constant.ts";
 import axios from "axios";
 
 /**center for tv api and movie api */
 const fetchCastCrew = async (id: string, type: "movie" | "tv") => {
   const response = await axios.get(
-    `https://api.themoviedb.org/3/${type}/${id}/credits?language=en-US`,
-    {
-      headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${TOKEN_TMDB}`,
-      },
-    }
+    `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${API_KEY}&language=en-US`
   );
   return response.data;
 };

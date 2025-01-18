@@ -9,9 +9,9 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { AppDispatch } from "../../store/store.tsx";
+import { AppDispatch, RootState } from "../../store/store.tsx";
 import DataList from "../DataList/DataList.tsx";
 import {
   handleRecommend,
@@ -28,6 +28,9 @@ const RecomSimilar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const [value, setValue] = React.useState("recommend");
+  const isLoading = useSelector<RootState, any[]>(
+    (state) => state.movie?.loading
+  );
 
   /**set the values of tabs */
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {

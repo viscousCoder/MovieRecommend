@@ -78,7 +78,11 @@ const HomeComponent = () => {
 
                   <Tab label="TV" value="tv" sx={{ color: "#fff" }} />
                 </TabList>
-                <Typography variant="body2" onClick={handleClick}>
+                <Typography
+                  variant="body2"
+                  onClick={handleClick}
+                  sx={{ cursor: "pointer" }}
+                >
                   See all
                 </Typography>
               </Box>

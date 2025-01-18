@@ -21,14 +21,6 @@ function App() {
         {
           path: ":id",
           element: <DetailPage />,
-          loader: async ({ params }) => {
-            const id = params.id;
-            if (!id || isNaN(Number(id))) {
-              throw new Response("Not Found", { status: 404 });
-            }
-            return null;
-          },
-          errorElement: <PageNotFound />,
         },
         {
           path: "trending",

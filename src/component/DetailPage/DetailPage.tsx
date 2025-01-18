@@ -6,11 +6,13 @@ import { fetchEntityDetails } from "../../store/detailSlice.tsx";
 import {
   Box,
   Card,
+  CardContent,
   CardMedia,
   Container,
   Divider,
   Typography,
 } from "@mui/material";
+import { MovieCreationOutlined } from "@mui/icons-material"; // Fallback Icon
 import RecomSimilar from "./RecomSimilar.tsx";
 import CompanyProduction from "./CompanyProduction.tsx";
 import { handleCastCrew } from "../../store/crewcastSlice.tsx";
@@ -18,17 +20,12 @@ import CastCrewAvtar from "./CastCrewAvtar.tsx";
 import { handleReviews } from "../../store/reviewSlice.tsx";
 import ReviewComponent from "./ReviewComponent.tsx";
 
-/**
- *
- * @returns show movie details and similar and recommended movies
- */
 const DetailPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch<AppDispatch>();
   const data = useSelector<RootState>((state) => state.detail.details);
   const castCrew = useSelector<RootState>((state) => state.castCrew.details);
   const reviews = useSelector<RootState>((state) => state.review.details);
-  // console.log(reviews);
 
   useEffect(() => {
     let item_type = localStorage.getItem("media_type");
@@ -44,55 +41,39 @@ const DetailPage = () => {
       : dispatch(handleReviews({ id: id, type: "tv" }));
   }, [id, dispatch]);
 
-  // console.log(data);
-
   return (
     <Box>
+      {/* Background Section */}
       <Box
         sx={{
-          background: {
-            xs: "none",
-            md: `url(http://image.tmdb.org/t/p/w500${data.backdrop_path})`,
-          },
-
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          // backgroundSize: "cover",
-          // backgroundPosition: "cover",
-          backgroundSize: { md: "cover" },
-          backgroundPosition: { md: "cover" },
-          // height: "calc(100vh - 30vh)",
+          background: data.backdrop_path
+            ? `url(http://image.tmdb.org/t/p/w500${data.backdrop_path})`
+            : "rgba(0, 0, 0, 0.5)", // Fallback background
+          backgroundSize: data.backdrop_path ? "cover" : "contain",
+          backgroundPosition: "center",
           height: { xs: "90%", md: "calc(100vh - 30vh)" },
-
-          //   color: "#fff",
+          position: "relative",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
+        {/* Overlay */}
         <Box
           sx={{
             position: "absolute",
-            p: 0,
-            top: { xs: 0, md: "calc(100px - 35px)" },
+            top: 0,
             left: 0,
             width: "100%",
-            height: "inherit",
-            backgroundColor: { xs: "none", md: "rgba(0, 0, 0, 0.5)" }, // 50% black opacity
-            // backgroundColor: "rgba(0, 0, 0, 0.5)",
-            zIndex: 1,
+            height: "100%",
+            backgroundColor: data.backdrop_path ? "rgba(0, 0, 0, 0.5)" : "none",
           }}
         />
-        {/* <Container>
-          <Box>
-            <Card>
-              <CardMedia
-                image={`http://image.tmdb.org/t/p/w500${data.poster_path}`}
-                title="green iguana"
-              />
-            </Card>
-          </Box>
-        </Container> */}
+
         <Container
           sx={{
             position: "relative",
-            zIndex: 2, // Ensure content is above the overlay
+            zIndex: 2,
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             alignItems: { xs: "center", md: "flex-start" },
@@ -101,27 +82,47 @@ const DetailPage = () => {
             paddingY: 4,
           }}
         >
-          {/* Left: Card with Movie Poster */}
+          {/* Movie Poster */}
           <Card
             sx={{
               width: { xs: "100%", md: "30%" },
               boxShadow: 3,
               borderRadius: 2,
               overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <CardMedia
-              component="img"
-              image={`http://image.tmdb.org/t/p/w500${data.poster_path}`}
-              alt={data.title}
-              sx={{
-                width: "100%",
-                height: "auto",
-              }}
-            />
+            {data.poster_path ? (
+              <CardMedia
+                component="img"
+                image={`http://image.tmdb.org/t/p/w500${data.poster_path}`}
+                alt={data.title || "Poster"}
+                sx={{ width: "100%", height: "auto" }}
+              />
+            ) : (
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  padding: 2,
+                }}
+              >
+                <MovieCreationOutlined
+                  sx={{ fontSize: 48, color: "gray", marginBottom: 1 }}
+                />
+                <Typography variant="body1" color="text.secondary">
+                  Poster Not Available
+                </Typography>
+              </CardContent>
+            )}
           </Card>
 
-          {/* Right: Movie Details */}
+          {/* Movie Details */}
           <Box
             sx={{
               flex: 1,
@@ -129,44 +130,36 @@ const DetailPage = () => {
               alignSelf: "center",
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column ",
-                justifyContent: "left",
-                textAlign: "left",
-              }}
+            <Typography
+              variant="h4"
+              component="h1"
+              gutterBottom
+              sx={{ color: "white" }}
             >
-              <Typography
-                variant="h4"
-                component="h1"
-                gutterBottom
-                sx={{ color: "white" }}
-              >
-                {data.title || data.name}
-              </Typography>
-              <Typography variant="body1" gutterBottom sx={{ color: "white" }}>
-                {data.overview}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{ color: "white" }}
-              >
-                Release Date: {data.release_date}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{ color: "white" }}
-              >
-                Rating: {data.vote_average} / 10
-              </Typography>
-            </Box>
+              {data.title || data.name || "Title Not Available"}
+            </Typography>
+            <Typography variant="body1" gutterBottom sx={{ color: "white" }}>
+              {data.overview || "Overview Not Available"}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ color: "white" }}
+            >
+              Release Date: {data.release_date || "N/A"}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ color: "white" }}
+            >
+              Rating: {data.vote_average ? `${data.vote_average} / 10` : "N/A"}
+            </Typography>
           </Box>
         </Container>
       </Box>
 
+      {/* Additional Details */}
       <Container
         sx={{
           mt: { xs: "1rem", md: "3rem" },

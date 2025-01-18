@@ -80,6 +80,7 @@ const Header = () => {
   const handleSearch = () => {
     navigate("/search");
     dispatch(handleSearchBar(searchQuery));
+    setSearchQuery("");
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
