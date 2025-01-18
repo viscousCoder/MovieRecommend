@@ -38,6 +38,7 @@ const reviewSlice = createSlice({
       .addCase(handleReviews.pending, (state) => {
         state.loading = true;
         state.error = "";
+        state.details = [];
       })
       .addCase(handleReviews.fulfilled, (state, action) => {
         state.loading = false;

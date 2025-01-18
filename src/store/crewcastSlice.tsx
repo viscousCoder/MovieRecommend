@@ -39,6 +39,7 @@ const crewcastSlice = createSlice({
       .addCase(handleCastCrew.pending, (state) => {
         state.loading = true;
         state.error = "";
+        state.details = {};
       })
       .addCase(handleCastCrew.fulfilled, (state, action) => {
         state.loading = false;
@@ -47,6 +48,7 @@ const crewcastSlice = createSlice({
       })
       .addCase(handleCastCrew.rejected, (state, action) => {
         state.loading = false;
+        state.details = {};
         state.error = action.error.message || "Something went wrong";
       });
   },

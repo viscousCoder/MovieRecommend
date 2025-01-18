@@ -57,7 +57,12 @@ const HomeComponent = () => {
         // </Box>
         <Loading />
       ) : (
-        <Container sx={{ maxWidth: "1500px !important" }}>
+        <Container
+          sx={{ maxWidth: "1500px !important", mt: { xs: 3, md: 10 } }}
+        >
+          <Typography variant="h4" sx={{ fontWeight: "900" }}>
+            Trending
+          </Typography>
           <Box sx={{ width: "100%", typography: "body1" }}>
             <TabContext value={value}>
               <Box
@@ -67,6 +72,9 @@ const HomeComponent = () => {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
+
+                  borderBottomWidth: "thin",
+                  color: "#e1d6d6",
                 }}
               >
                 <TabList
