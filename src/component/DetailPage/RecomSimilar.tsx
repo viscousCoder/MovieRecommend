@@ -29,8 +29,6 @@ const RecomSimilar = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [value, setValue] = React.useState("recommend");
 
-  let data_type = localStorage.getItem("media_type");
-
   /**set the values of tabs */
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);

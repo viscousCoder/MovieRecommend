@@ -28,7 +28,6 @@ const DetailPage = () => {
   const data = useSelector<RootState>((state) => state.detail.details);
   const castCrew = useSelector<RootState>((state) => state.castCrew.details);
   const reviews = useSelector<RootState>((state) => state.review.details);
-  let item_type = localStorage.getItem("media_type");
   // console.log(reviews);
 
   useEffect(() => {
