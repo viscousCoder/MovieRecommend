@@ -110,7 +110,7 @@ const CastCrewAvtar: React.FC<CastSliderProps> = ({ cast, title }) => {
       <Typography variant="h6" gutterBottom>
         {title}
       </Typography>
-      {cast.length > 1 ? (
+      {cast?.length > 1 ? (
         <Slider {...sliderSettings}>
           {cast?.map((member) => (
             <Box

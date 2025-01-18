@@ -123,7 +123,7 @@ const DataList = () => {
                           textOverflow: "ellipsis",
                         }}
                       >
-                        {(item.title ?? item.name ?? "Unknown").length > 25
+                        {(item.title ?? item.name ?? "Unknown")?.length > 25
                           ? (item.title ?? item.name)?.slice(0, 20) + "..."
                           : item.title ?? item.name ?? "Unknown"}
                         {/* {(item.title || item.name||).length > 25

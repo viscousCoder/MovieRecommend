@@ -109,7 +109,7 @@ const CompanyProduction: React.FC = () => {
             {data.spoken_languages?.map((lang, index) => (
               <span key={lang.iso_639_1}>
                 {lang.english_name}
-                {index < data.spoken_languages.length - 1 && ", "}
+                {index < data.spoken_languages?.length - 1 && ", "}
               </span>
             ))}
           </Typography>
