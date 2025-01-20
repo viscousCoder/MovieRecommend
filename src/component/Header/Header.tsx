@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store.tsx";
 import { handleSearchBar } from "../../store/movieSlice.tsx";
+import "./Header.css";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -153,7 +154,10 @@ const Header = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https:/mui.com/static/images/avatar/2.jpg"
+                />
               </IconButton>
             </Tooltip>
             <Menu
