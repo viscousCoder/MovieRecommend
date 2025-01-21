@@ -51,7 +51,7 @@ const Filters: React.FC = () => {
               "Japanese",
               "Jonsari",
               "Tamil",
-            ].map((lang) => (
+            ]?.map((lang) => (
               <Button
                 key={lang}
                 variant="outlined"
@@ -91,7 +91,7 @@ const Filters: React.FC = () => {
               "Mystery",
               "Thriller",
               "Musicals",
-            ].map((genre) => (
+            ]?.map((genre) => (
               <Button
                 key={genre}
                 variant="outlined"
@@ -132,7 +132,7 @@ const Filters: React.FC = () => {
               "IMAX 3D",
               "ICE",
               "ICE 3D",
-            ].map((format) => (
+            ]?.map((format) => (
               <Button
                 key={format}
                 variant="outlined"

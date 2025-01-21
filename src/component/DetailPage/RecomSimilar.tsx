@@ -31,7 +31,6 @@ const RecomSimilar = () => {
   const isLoading = useSelector<RootState, any[]>(
     (state) => state.movie?.loading
   );
-  let data_type = localStorage.getItem("media_type");
 
   /**set the values of tabs */
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -44,17 +43,19 @@ const RecomSimilar = () => {
   };
 
   useEffect(() => {
+    let data_type = localStorage.getItem("media_type");
+
     if (value === "recommend") {
-      data_type == "movie"
+      data_type === "movie"
         ? dispatch(handleRecommend(id))
         : dispatch(handleRecommendTvShow(id));
     }
     if (value === "similar") {
-      data_type == "movie"
+      data_type === "movie"
         ? dispatch(handleSimilar(id))
         : dispatch(handleSimilarTvShow(id));
     }
-  }, [value, id]);
+  }, [value, id, dispatch]);
 
   return (
     <>

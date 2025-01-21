@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
-import AdbIcon from "@mui/icons-material/Adb";
 import SearchIcon from "@mui/icons-material/Search";
 
 import React, { useState } from "react";
@@ -19,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store.tsx";
 import { handleSearchBar } from "../../store/movieSlice.tsx";
-import logo from "../assets/logo1.png";
+import "./Header.css";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -68,7 +67,7 @@ const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
-  const [searchQuery, setSearchQuery] = useState(""); // State for search input
+  const [searchQuery, setSearchQuery] = useState<string>(""); // State for search input
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -82,6 +81,7 @@ const Header = () => {
   const handleSearch = () => {
     navigate("/search");
     dispatch(handleSearchBar(searchQuery));
+    setSearchQuery("");
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
@@ -154,7 +154,10 @@ const Header = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https:/mui.com/static/images/avatar/2.jpg"
+                />
               </IconButton>
             </Tooltip>
             <Menu
@@ -173,7 +176,7 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {settings?.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography sx={{ textAlign: "center" }}>
                     {setting}

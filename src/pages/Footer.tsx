@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
           >
             Popular Categories
           </Typography>
-          {["Standup", "Action", "Thriller", "Science", "Horror"].map(
+          {["Standup", "Action", "Thriller", "Science", "Horror"]?.map(
             (item) => (
               <Typography key={item} variant="body2">
                 <Link href="#" color="inherit" underline="hover">
@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
           >
             Platform
           </Typography>
-          {["BookmyShow ", "Netflix", "Amazon", "Hotstar", "Viki"].map(
+          {["BookmyShow ", "Netflix", "Amazon", "Hotstar", "Viki"]?.map(
             (item) => (
               <Typography key={item} variant="body2">
                 <Link href="#" color="inherit" underline="hover">
@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
             "Terms And Conditions",
             "About Us",
             "Secure Payment",
-          ].map((item) => (
+          ]?.map((item) => (
             <Typography key={item} variant="body2">
               <Link href="#" color="inherit" underline="hover">
                 {item}
@@ -101,7 +101,7 @@ const Footer: React.FC = () => {
             "Best Sales",
             "Contact Us",
             "Sitemap",
-          ].map((item) => (
+          ]?.map((item) => (
             <Typography key={item} variant="body2">
               <Link href="#" color="inherit" underline="hover">
                 {item}

@@ -2,7 +2,6 @@ import React from "react";
 import { Box, Grid, Typography, Button, Divider } from "@mui/material";
 import Filters from "./Filters.tsx";
 import MovieCard from "./MovieCard.tsx";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store.tsx";
 
@@ -11,14 +10,8 @@ import { RootState } from "../../store/store.tsx";
  * @returns show the movies list and filter
  */
 const MoviesPage: React.FC = () => {
-  const navigate = useNavigate();
   const movies = useSelector<RootState, any[]>((state) => state.movie.data);
 
-  const handleClick = (movie) => {
-    console.log(movie);
-    localStorage.setItem("media_type", movie.media_type);
-    navigate(`/${movie.id}`);
-  };
   return (
     <Box
       display="flex"
@@ -57,7 +50,7 @@ const MoviesPage: React.FC = () => {
             "Japanese",
             "Jonsari",
             "Tamil",
-          ].map((tag) => (
+          ]?.map((tag) => (
             <Button
               variant="outlined"
               sx={{
@@ -78,7 +71,7 @@ const MoviesPage: React.FC = () => {
         <Divider sx={{ my: 2 }} />
 
         <Grid container spacing={2}>
-          {movies.map((movie) => (
+          {movies?.map((movie) => (
             <Grid
               item
               xs={12}

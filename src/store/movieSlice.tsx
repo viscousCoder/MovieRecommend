@@ -1,26 +1,62 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { TOKEN_TMDB } from "../common/constant.ts";
+import { API_KEY } from "../common/constant.ts";
 
-const token = TOKEN_TMDB;
+// const token = TOKEN_TMDB;
+
+export interface MediaItem {
+  id: number;
+  title?: string;
+  name?: string;
+  original_title?: string;
+  original_name?: string;
+  overview: string;
+  poster_path: string;
+  backdrop_path: string;
+  genre_ids: number[];
+  media_type: "movie" | "tv";
+  adult: boolean;
+  original_language: string;
+  popularity: number;
+  release_date?: string;
+  first_air_date?: string;
+  vote_average: number;
+  vote_count: number;
+  video?: boolean;
+  origin_country?: string[];
+  profile_path?: string;
+}
+
+export interface ApiResponse {
+  loading: boolean;
+  data: MediaItem[];
+  error: string;
+}
+
+export interface ThunkPayload {
+  id?: string;
+  query?: string;
+}
+
+interface MovieState {
+  loading: boolean;
+  data: MediaItem[];
+  error: string;
+}
 
 const apiClient = axios.create({
   baseURL: "https://api.themoviedb.org/3",
-  headers: {
-    accept: "application/json",
-    Authorization: `Bearer ${token}`,
-  },
 });
 
 const initialState = {
   loading: false,
-  data: [],
+  data: [] as MediaItem[],
   error: "",
-};
+} as MovieState;
 
 /** Generic Thunk Creator */
 const createThunk = (type: string, url: string) =>
-  createAsyncThunk(type, async (payload?: any) => {
+  createAsyncThunk(type, async (payload?: ThunkPayload) => {
     try {
       const response = await apiClient.get(
         typeof url === "function" ? url(payload) : url
@@ -36,13 +72,13 @@ const createThunk = (type: string, url: string) =>
 /**Get all treding movies and shows */
 export const allMoviesAndShow = createThunk(
   "/all",
-  `/trending/all/day?language=en-US`
+  `/trending/all/day?api_key=${API_KEY}`
 );
 
 /**Get all trending movies */
 export const trendingMovie = createThunk(
   "/trending",
-  `/trending/movie/day?language=en-US`
+  `/trending/movie/day?api_key=${API_KEY}`
 );
 
 // export const handlePeople = createThunk(
@@ -51,37 +87,43 @@ export const trendingMovie = createThunk(
 // );
 
 /**Get all trending shows */
-export const handleTv = createThunk("/tv", `/trending/tv/day?language=en-US`);
+export const handleTv = createThunk(
+  "/tv",
+  `/trending/tv/day?api_key=${API_KEY}`
+);
 
 /**Get recommended movies */
 export const handleRecommend = createThunk(
   "/recommend",
-  (id: string) => `/movie/${id}/recommendations?language=en-US&page=1`
+  (id: string) =>
+    `/movie/${id}/recommendations?api_key=${API_KEY}&language=en-US&page=1`
 );
 
 /**Get similar movies */
 export const handleSimilar = createThunk(
   "/similar",
-  (id: string) => `/movie/${id}/similar?language=en-US&page=1`
+  (id: string) =>
+    `/movie/${id}/similar?api_key=${API_KEY}&language=en-US&page=1`
 );
 
 /**Get recommended shows */
 export const handleRecommendTvShow = createThunk(
   "/recommend/tv",
-  (id: string) => `/tv/${id}/recommendations?language=en-US&page=1`
+  (id: string) =>
+    `/tv/${id}/recommendations?api_key=${API_KEY}&language=en-US&page=1`
 );
 
 /**Get similar shows */
 export const handleSimilarTvShow = createThunk(
   "/similar/tv",
-  (id: string) => `/tv/${id}/similar?language=en-US&page=1`
+  (id: string) => `/tv/${id}/similar?api_key=${API_KEY}&language=en-US&page=1`
 );
 
 /**Get search data */
 export const handleSearchBar = createThunk(
   "/searchBar",
   (query: string) =>
-    `/search/movie?query=${query}&include_adult=false&language=en-US&page=1`
+    `/search/movie?api_key=${API_KEY}&query=${query}&include_adult=false&language=en-US&page=1`
 );
 
 /** Utility Function to Add Cases */

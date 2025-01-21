@@ -1,14 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import {
-  Avatar,
-  Box,
-  Grid,
-  Typography,
-  Card,
-  CardContent,
-} from "@mui/material";
+import { Avatar, Box, Grid, Typography, Card } from "@mui/material";
 
 /**
  *
@@ -46,7 +39,7 @@ const CompanyProduction: React.FC = () => {
           Production Companies
         </Typography>
         <Grid container spacing={2}>
-          {companies.map((company) => (
+          {companies?.map((company) => (
             <Grid item xs={12} sm={6} md={4} key={company.id}>
               <Card
                 sx={{
@@ -101,7 +94,7 @@ const CompanyProduction: React.FC = () => {
             {data.genres?.map((genre, index) => (
               <span key={genre.id}>
                 {genre.name}
-                {index < data.genres.length - 1 && ", "}
+                {index < data.genres?.length - 1 && ", "}
               </span>
             ))}
           </Typography>
@@ -116,7 +109,7 @@ const CompanyProduction: React.FC = () => {
             {data.spoken_languages?.map((lang, index) => (
               <span key={lang.iso_639_1}>
                 {lang.english_name}
-                {index < data.spoken_languages.length - 1 && ", "}
+                {index < data.spoken_languages?.length - 1 && ", "}
               </span>
             ))}
           </Typography>

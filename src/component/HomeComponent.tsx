@@ -3,18 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store.tsx";
 import {
   allMoviesAndShow,
-  handlePeople,
   handleTv,
   trendingMovie,
 } from "../store/movieSlice.tsx";
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Tab,
-  Typography,
-} from "@mui/material";
-import TrendingMovie from "./TrendingMovie.tsx";
+import { Box, Container, Tab, Typography } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
@@ -38,7 +30,7 @@ const HomeComponent = () => {
     if (value === "all") dispatch(allMoviesAndShow());
     if (value === "movie") dispatch(trendingMovie());
     if (value === "tv") dispatch(handleTv());
-  }, [value]);
+  }, [value, dispatch]);
 
   const handleClick = () => {
     navigate("/trending");
@@ -65,7 +57,12 @@ const HomeComponent = () => {
         // </Box>
         <Loading />
       ) : (
-        <Container sx={{ maxWidth: "1500px !important" }}>
+        <Container
+          sx={{ maxWidth: "1500px !important", mt: { xs: 3, md: 10 } }}
+        >
+          <Typography variant="h4" sx={{ fontWeight: "900" }}>
+            Trending
+          </Typography>
           <Box sx={{ width: "100%", typography: "body1" }}>
             <TabContext value={value}>
               <Box
@@ -75,6 +72,9 @@ const HomeComponent = () => {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
+
+                  borderBottomWidth: "thin",
+                  color: "#e1d6d6",
                 }}
               >
                 <TabList
@@ -86,7 +86,11 @@ const HomeComponent = () => {
 
                   <Tab label="TV" value="tv" sx={{ color: "#fff" }} />
                 </TabList>
-                <Typography variant="body2" onClick={handleClick}>
+                <Typography
+                  variant="body2"
+                  onClick={handleClick}
+                  sx={{ cursor: "pointer" }}
+                >
                   See all
                 </Typography>
               </Box>

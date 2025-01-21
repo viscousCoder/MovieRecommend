@@ -109,7 +109,7 @@ const TrendingMovie: React.FC = () => {
   return (
     <Box position="relative" width="100%">
       <Slider {...settings}>
-        {trendingMovies.map((item) => (
+        {trendingMovies?.map((item) => (
           <Box key={item.id} onClick={() => handleClick(item)} px={1}>
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>

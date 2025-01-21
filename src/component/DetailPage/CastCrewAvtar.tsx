@@ -110,12 +110,45 @@ const CastCrewAvtar: React.FC<CastSliderProps> = ({ cast, title }) => {
       <Typography variant="h6" gutterBottom>
         {title}
       </Typography>
-      <Slider {...sliderSettings}>
-        {cast?.map((member) => (
+      {cast?.length > 1 ? (
+        <Slider {...sliderSettings}>
+          {cast?.map((member) => (
+            <Box
+              key={member.id}
+              sx={{
+                display: "flex !important",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+                padding: "8px",
+              }}
+            >
+              <Avatar
+                src={
+                  member.profile_path
+                    ? `${profileBaseUrl}${member.profile_path}`
+                    : undefined
+                }
+                alt={member.name}
+                sx={{ width: 140, height: 140, marginBottom: "8px" }}
+              >
+                {member.name.charAt(0).toUpperCase()}
+              </Avatar>
+              <Typography variant="body2" fontWeight="bold">
+                {member.name || "Side Role"}
+              </Typography>
+              <Typography variant="caption" fontWeight="bold" color="#cbc6c6">
+                {member.character || member.job}
+              </Typography>
+            </Box>
+          ))}
+        </Slider>
+      ) : (
+        cast?.map((member) => (
           <Box
             key={member.id}
             sx={{
-              display: "flex !important",
+              display: "flex",
               flexDirection: "column",
               alignItems: "center",
               textAlign: "center",
@@ -131,11 +164,7 @@ const CastCrewAvtar: React.FC<CastSliderProps> = ({ cast, title }) => {
               alt={member.name}
               sx={{ width: 140, height: 140, marginBottom: "8px" }}
             >
-              {" "}
-              <h1>
-                {" "}
-                {!member.profile_path && member.name.charAt(0).toUpperCase()}
-              </h1>
+              {member.name.charAt(0).toUpperCase()}
             </Avatar>
             <Typography variant="body2" fontWeight="bold">
               {member.name || "Side Role"}
@@ -144,8 +173,8 @@ const CastCrewAvtar: React.FC<CastSliderProps> = ({ cast, title }) => {
               {member.character || member.job}
             </Typography>
           </Box>
-        ))}
-      </Slider>
+        ))
+      )}
     </Box>
   );
 };

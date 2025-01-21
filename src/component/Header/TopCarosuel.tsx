@@ -90,7 +90,7 @@ const TopCarousel = () => {
   return (
     <Box sx={{ width: "100%", overflow: "hidden" }}>
       <Slider {...settings}>
-        {carouselItems.map((item, index) => (
+        {carouselItems?.map((item, index) => (
           <Box
             key={index}
             sx={{
